@@ -1,13 +1,21 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const port = 3000;
+require('dotenv').config();
 
-app.use(express.static('public'));
-app.use('/static', express.static(path.join(__dirname, 'public')));
+import express, { json, urlencoded } from 'express';
+import path from 'path';
+const app = express();
+let corsOptions = {
+    origin: 'http://localhost:8081'
+};
+const port = process.env.PORT || 8080;
+
+app.use(cors(corsOptions));
+app.use(json());
+app.use(urlencoded({extended: true}));
+// app.use(express.static('public'));
+// app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.json({ message: "Hello World!" });
 });
 
 app.post('/', (req, res) => {
