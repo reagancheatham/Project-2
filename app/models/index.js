@@ -13,8 +13,11 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     }
 });
 
-export const db = 
+const db = 
 {
     Sequelize: Sequelize,
-    sequelize: sequelize
+    sequelize: sequelize,
+    courses: require('./course.model.js')(sequelize, Sequelize)
 };
+
+export default db;

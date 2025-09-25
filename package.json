@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-	"bundle": "mkdir deploy && cp -r app server.js package.json package-lock.json project-2.service .env deploy"
+    "start": "node app.js",
+	"bundle": "mkdir deploy && cp -r app app.js package.json package-lock.json project-2.service .env deploy"
   },
   "author": "",
   "license": "ISC",
