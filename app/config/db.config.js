@@ -3,14 +3,18 @@ const db_host = process.env.DB_HOST;
 const db_user = process.env.DB_USER;
 const db_pw = process.env.DB_PW;
 
-export const DB = db_name;
-export const HOST = db_host;
-export const USER = db_user;
-export const PASSWORD = db_pw;
-export const dialect = "mysql";
-export const pool = {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000,
+const dbConfig = {
+    name: db_name,
+    host: db_host,
+    user: db_user,
+    password: db_pw,
+    dialect: "mysql",
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000,
+    },
 };
+
+export default dbConfig;

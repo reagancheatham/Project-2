@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node -r dotenv/config app.js",
 	"bundle": "mkdir deploy && cp -r app app.js package.json package-lock.json project-2.service .env deploy"
   },
   "author": "",
@@ -15,5 +15,6 @@
     "express": "^5.1.0",
     "mysql2": "^3.15.0",
     "sequelize": "^6.37.7"
-  }
+  },
+  "type": "module"
 }
