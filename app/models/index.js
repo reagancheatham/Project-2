@@ -19,10 +19,12 @@ const sequelize = new Sequelize(
     }
 );
 
+const courses = createModel(sequelize, Sequelize);
+
 const db = {
     Sequelize: Sequelize,
     sequelize: sequelize,
-    courses: createModel(sequelize, Sequelize),
+    courses
 };
 
 export default db;

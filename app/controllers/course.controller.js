@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 
 const courses = {
     create: (req, res) => {
-        if (!req.body.title) {
+        if (!req.body.name) {
             res.status(400).send({
                 message: "Content can not be empty!",
             });
@@ -35,11 +35,11 @@ const courses = {
             });
     },
     findAll: (req, res) => {
-        const courseNumber = req.query.courseNumber;
-        let condition = courseNumber
+        const department = req.query.department;
+        let condition = department
             ? {
-                  courseNumber: {
-                      [Op.like]: `%${courseNumber}`,
+                  department: {
+                      [Op.like]: `%${department}`,
                   },
               }
             : null;
@@ -70,7 +70,7 @@ const courses = {
             })
             .catch((err) => {
                 res.status(500).send({
-                    message: `Error retrieving course with id=${courseNumber}.`,
+                    message: `Error retrieving course with courseNumber=${courseNumber}.`,
                 });
             });
     },
