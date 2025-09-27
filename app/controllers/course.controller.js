@@ -14,14 +14,14 @@ const courses = {
         }
 
         const course = {
-            courseNumber: req.params.courseNumber,
+            courseNumber: req.body.courseNumber,
             name: req.body.name,
             department: req.body.department,
             description: req.body.description,
             level: req.body.level,
             hours: req.body.hours,
         };
-
+        
         Courses.create(course)
             .then((data) => {
                 res.send(data);
