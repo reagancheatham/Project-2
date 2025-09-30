@@ -46,7 +46,7 @@ jobs:
           TARGET: "nodeapps/2025/project2/t6"
         
       - name: Execute SSH Commands on Remote Server
-        uses: JimConqvist/action-ssh@master
+        uses: JimCronqvist/action-ssh@master
         env:
           NAME: "Root"
         with:
