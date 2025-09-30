@@ -18,17 +18,13 @@ jobs:
       PORT: ${{ secrets.PORT }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: dev
-
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: "20"
-
+          node-version: 20
       - run: npm install
-
-      - run: npm run bundle
 
       - run: |
           touch .env
@@ -37,6 +33,8 @@ jobs:
           echo DB_PW = "$DB_PW" >> .env
           echo DB_NAME = "$DB_NAME" >> .env
           echo PORT = "$PORT" >> .env
+        
+      - run: npm run bundle
 
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
@@ -47,8 +45,8 @@ jobs:
           REMOTE_HOST: "project2.eaglesoftwareteam.com"
           REMOTE_USER: ubuntu
           TARGET: "nodeapps/2025/project2/t6"
-          
-      - name: Execute SSH commmands on remote server
+        
+      - name: Execute SSH Commands on Remote Server
         uses: JimCronqvist/action-ssh@master
         env:
           NAME: "Root"
@@ -63,3 +61,4 @@ jobs:
             sudo cp course-backend.service /lib/systemd/system/course-backend-t6.service
             sudo systemctl daemon-reload
             sudo systemctl start course-backend-t6
+
