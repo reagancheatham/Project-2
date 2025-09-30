@@ -57,8 +57,8 @@ jobs:
           command: |
             cd nodeapps/2025/project2/t6
             npm install
-            sudo systemctl stop course-backend-t6
-            sudo cp course-backend-t6.service /lib/systemd/system/course-backend-t6.service
+            sudo systemctl stop course-t6-backend
+            sudo cp course-t6-backend.service /lib/systemd/system/course-t6-backend.service
             sudo systemctl daemon-reload
-            sudo systemctl start course-backend-t6
+            sudo systemctl start course-t6-backend
 
