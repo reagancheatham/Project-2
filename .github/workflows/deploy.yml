@@ -10,32 +10,15 @@ on:
 jobs:
   aws-deploy:
     runs-on: ubuntu-latest
-    env:
-      DB_HOST: ${{ secrets.DB_HOST }}
-      DB_USER: ${{ secrets.DB_USER }}
-      DB_PW: ${{ secrets.DB_PW }}
-      DB_NAME: ${{ secrets.DB_NAME }}
-      PORT: ${{ secrets.PORT }}
-
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
         with:
           ref: dev
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: "20"
       - run: npm install
-
-      - run: |
-          touch .env
-          echo DB_HOST = "$DB_HOST" >> .env
-          echo DB_USER = "$DB_USER" >> .env
-          echo DB_PW = "$DB_PW" >> .env
-          echo DB_NAME = "$DB_NAME" >> .env
-          echo PORT = "$PORT" >> .env
-        
       - run: npm run bundle
-
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
@@ -44,9 +27,8 @@ jobs:
           SOURCE: "deploy/"
           REMOTE_HOST: "project2.eaglesoftwareteam.com"
           REMOTE_USER: ubuntu
-          TARGET: "/home/ubuntu/nodeapps/2025/project2/t6"
-        
-      - name: Execute SSH Commands on Remote Server
+          TARGET: "nodeapps/2025/project2/t6"
+      - name: Execute SSH commmands on remote server
         uses: JimCronqvist/action-ssh@master
         env:
           NAME: "Root"
@@ -58,7 +40,6 @@ jobs:
             cd nodeapps/2025/project2/t6
             npm install
             sudo systemctl stop course-backend-t6
-            sudo cp course-backend-t6.service /lib/systemd/system/course-backend-t6.service
+            sudo cp course-backend.service /lib/systemd/system/course-backend-t6.service
             sudo systemctl daemon-reload
             sudo systemctl start course-backend-t6
-
