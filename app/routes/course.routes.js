@@ -22,5 +22,5 @@ export default (app) => {
     // Delete all courses
     router.delete("/", courses.destroyAll);
 
-    app.use('/project-2/course-t6', router);
+    app.use('/course-t6/courses', router);
 };
