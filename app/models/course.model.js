@@ -3,7 +3,7 @@ export default (sequelize, Sequelize) => {
         "course",
         {
             courseNumber: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.STRING,
                 primaryKey: true,
             },
             name: {
