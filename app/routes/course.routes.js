@@ -7,6 +7,9 @@ export default (app) => {
     // Create a new course
     router.post("/", courses.create);
     
+    // Create multiple courses
+    router.post("/all", courses.createAll);
+
     // Retrieve all courses
     router.get("/", courses.findAll);
 

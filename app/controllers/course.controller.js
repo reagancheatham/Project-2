@@ -21,7 +21,7 @@ const courses = {
             level: req.body.level,
             hours: req.body.hours,
         };
-        
+
         Courses.create(course)
             .then((data) => {
                 res.send(data);
@@ -31,6 +31,27 @@ const courses = {
                     message:
                         err.message ||
                         "Some error occurred while creating the course.",
+                });
+            });
+    },
+    createAll: (req, res) => {
+        const courses = req.body;
+        let promises = [];
+
+        courses.forEach((course) => {
+            const promise = Courses.create(course);
+            promises.push(promise);
+        });
+
+        Promise.allSettled(promises)
+            .then((data) => {
+                res.send(data);
+            })
+            .catch((err) => {
+                res.status(500).send({
+                    message:
+                        err.message ||
+                        "Some error occurred while creating all courses"
                 });
             });
     },
